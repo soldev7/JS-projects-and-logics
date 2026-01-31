@@ -9,8 +9,6 @@ let count = 0
 function increment() { //increment() is the function we used on html btn clicked attibute
     count += 1
     countEl.textContent = count
-    
-    
 }
 
 
