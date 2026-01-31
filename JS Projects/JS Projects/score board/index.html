@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score baord</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Score Board -->
+    <!-- // 7️⃣ Simple Scoreboard
+        // What:
+        // Team A +1
+        // Team B +1
+        // Display both scores
+        // Focus:
+        // Multiple states, multiple elements -->
+        <div class="container">
+            <h1>Score Board</h1>
+            <div class="teams">
+                <div class="teamA">
+                <h2>TEAM A</h2>
+                <p id="scoreA">Score: 0</p>
+                <button class="btn" id="add-a" onclick="addA()">ADD +1</button>
+                </div>
+                <div class="teamB">
+                    <h2>TEAM B</h2>
+                    <p id="scoreB">Score: 0</p>
+                    <button class="btn" id="add-b" onclick="addB()">ADD +1</button>
+                </div>
+                
+            </div>
+            <button class="btn" id="reset-btn" onclick="reset()">RESET GAME</button>
+        </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
