@@ -1,42 +1,51 @@
-// Create two variables, firstCard and secondCard.
-// Set the values of a random number between 2-11
-
-let firstCard = 3
-let secondCard = 11
-// array ordered list of itemns
-let cards = [firstCard, secondCard]
-
-// Create a variable, sum, and set it to the sum of the two cards
-let sum = firstCard + secondCard
+// Use getRandomCard() to set the values of firstCard and secondCard
+let cards = []
+let sum = 0
 let hasBlackJack = false
-// Create a variable called isAlive and assign it to true
-let isAlive = true
-// Declare a variable called message and assign its value to an empty string
+let isAlive = false
 let message = ""
-// Store the message-el paragraph in a variable 
+
+// DOM Elements
 let messageEl = document.querySelector("#message-el")
-// Display the sum
-// let sumEl = document.getElementById("sum-el")
-// Query selector
 let sumEl = document.querySelector("#sum-el")
-// store the cards paragraph in a variable called cardsEl
 let cardsEl = document.querySelector("#cards-el")
 
-// Create a new funciton called startGame() that calls renderGame()
-function startGame() {
-    renderGame()
+
+// Create a function, getRandomCard(), that always returns the number 5
+function getRandomCard() {
+    let randomCard = Math.floor( Math.random() * 13 ) + 1
+    if (randomCard > 10) {
+        return 10
+    } else if (randomCard === 1) {
+        return 11
+    } else {
+        return randomCard
+    }
 }
 
 
-// Create a startGame() name changed to renderGame function. Move the conditional below inside the body of the function
+// Starts the game by calling the render function
+function startGame() {
+    isAlive = true
+    let firstCard = getRandomCard()
+    let secondCard = getRandomCard()
+    cards = [firstCard, secondCard]
+    sum = firstCard + secondCard
+    renderGame()
+} 
 
+// Updates the UI and checks game status
 function renderGame() {
-    // Render the cards on the page using this format -> "Cards: 10 4"
-    cardsEl.textContent = "Cards: " + cards[0] + " " + cards[1]
-    // render out all the cards we have
+    // Reset cards display and loop through the array
+    cardsEl.textContent = "Cards: " 
+    for (let i = 0; i < cards.length; i++) {
+        cardsEl.textContent += cards[i] + " "
+    }
+
+    // Update sum display
+    sumEl.textContent = "Sum: " + sum
     
-    // display sum
-    sumEl.textContent ="Sum: " + sum
+    // Blackjack logic: check if the player can continue, won, or lost
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
     } else if (sum === 21) {
@@ -46,39 +55,19 @@ function renderGame() {
         message = "You're out of the game!"
         isAlive = false
     }
-    // display the message in messageEL using what learned before
+    
+    // Display the final message
     messageEl.textContent = message
-
 }
 
-
-// Creating a new card drawing function
+// Logic for drawing a new card
 function newCard() {
-    // console.log("Drawing a new card from the deck!")
-    // Create a card variable, and hard code it with a value to number(2-11)
-    let card = 3 
-    // add the new card to the sum variable
-    sum += card
-    // push the card to the cards array
-    cards.push(card)
-    console.log(cards)
-    // call the startGame()
-    renderGame() // call the function that updates the UI with the new sum
+    // Use the getRandomCard() to set the value of card
+    if (hasBlackJack === false && isAlive === true) {
+        let card = getRandomCard()
+        sum += card
+        cards.push(card)
+        renderGame() 
+    }
 }
 
-// Write the conditional according to these rules:
-
-// if less than or equal to 20 -> "Do you want to draw a new card?"
-// else if exactly 21 -> "Wohoo! You've got Blackjack!"
-// else -> "You're out of the game!"
-// flip the value of isALive to false in apporpriate code block
-
-// reassign  the message variable to the string we're logging out
-
-
-
-// // CASH OUT!
-// console.log(hasBlackJack)
-// // log it out ot check that you're doing it correctly
-// console.log(isAlive)
-// lot it out message var
