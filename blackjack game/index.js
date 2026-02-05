@@ -10,8 +10,19 @@ let messageEl = document.querySelector("#message-el")
 let sumEl = document.querySelector("#sum-el")
 let cardsEl = document.querySelector("#cards-el")
 
+let player = {
+    name: "Per",
+    chips: "$145"
+}
 
-// Create a function, getRandomCard(), that always returns the number 5
+// Player display element
+let playerEl = document.querySelector("#player-el")
+
+// Initialize player name and chips display
+playerEl.textContent = player.name + ": " + player.chips
+
+
+// Generates a random card value (J, Q, K = 10, Ace = 11)
 function getRandomCard() {
     let randomCard = Math.floor( Math.random() * 13 ) + 1
     if (randomCard > 10) {
@@ -24,7 +35,7 @@ function getRandomCard() {
 }
 
 
-// Starts the game by calling the render function
+// Resets game state and deals initial hand
 function startGame() {
     isAlive = true
     let firstCard = getRandomCard()
@@ -34,18 +45,18 @@ function startGame() {
     renderGame()
 } 
 
-// Updates the UI and checks game status
+// Syncs the UI with current card and sum values
 function renderGame() {
-    // Reset cards display and loop through the array
+    // Render cards array to the screen
     cardsEl.textContent = "Cards: " 
     for (let i = 0; i < cards.length; i++) {
         cardsEl.textContent += cards[i] + " "
     }
 
-    // Update sum display
+    // Update total sum display
     sumEl.textContent = "Sum: " + sum
     
-    // Blackjack logic: check if the player can continue, won, or lost
+    // Core game logic for Win/Loss/Continue
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
     } else if (sum === 21) {
@@ -56,13 +67,13 @@ function renderGame() {
         isAlive = false
     }
     
-    // Display the final message
+    // Update message display
     messageEl.textContent = message
 }
 
-// Logic for drawing a new card
+// Logic for adding a card if the game is still active
 function newCard() {
-    // Use the getRandomCard() to set the value of card
+    // Only allow drawing a card if alive and hasn't won
     if (hasBlackJack === false && isAlive === true) {
         let card = getRandomCard()
         sum += card
@@ -70,4 +81,3 @@ function newCard() {
         renderGame() 
     }
 }
-
